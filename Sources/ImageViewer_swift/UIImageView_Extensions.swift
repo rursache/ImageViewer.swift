@@ -101,7 +101,7 @@ extension UIImageView {
     public func addImageViewer(from viewController: UIViewController? = nil, useDarkMode: Bool = true) {
         guard let image = self.image else { return }
         
-        self.setupImageViewer(images: [image], options: [.theme(useDarkMode ? .dark : .light)], from: viewController)
+        self.setupImageViewer(images: [image], options: [.theme(useDarkMode ? .dark : .light), .closeIcon(UIImage(systemName: "xmark.circle.fill")!)], from: viewController)
     }
     
     @objc
