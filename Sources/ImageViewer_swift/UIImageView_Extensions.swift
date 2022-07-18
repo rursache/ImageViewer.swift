@@ -98,6 +98,12 @@ extension UIImageView {
         addGestureRecognizer(_tapRecognizer!)
     }
     
+    public func addImageViewer(from viewController: UIViewController? = nil, useDarkMode: Bool = true) {
+        guard let image = self.image else { return }
+        
+        self.setupImageViewer(images: [image], options: [.theme(useDarkMode ? .dark : .light)], from: viewController)
+    }
+    
     @objc
     private func showImageViewer(_ sender:TapWithDataRecognizer) {
         guard let sourceView = sender.view as? UIImageView else { return }
