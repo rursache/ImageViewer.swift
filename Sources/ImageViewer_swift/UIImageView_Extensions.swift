@@ -16,7 +16,7 @@ extension UIImageView {
         return rootVC.presentedViewController != nil ? rootVC.presentedViewController : rootVC
     }
     
-    public func setupImageViewer(
+    private func setupImageViewer(
         options:[ImageViewerOption] = [],
         from:UIViewController? = nil) {
         setup(
@@ -42,7 +42,7 @@ extension UIImageView {
             from: from)
     }
     
-    public func setupImageViewer(
+    private func setupImageViewer(
         datasource:ImageDataSource,
         initialIndex:Int = 0,
         options:[ImageViewerOption] = [],
@@ -98,6 +98,7 @@ extension UIImageView {
         addGestureRecognizer(_tapRecognizer!)
     }
     
+    @available(iOS 13.2, *)
     public func addImageViewer(from viewController: UIViewController? = nil, useDarkMode: Bool = true) {
         guard let image = self.image else { return }
         
