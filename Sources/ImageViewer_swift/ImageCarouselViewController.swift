@@ -28,7 +28,7 @@ public class ImageCarouselViewController:UIPageViewController, ImageViewerTransi
     
     var theme:ImageViewerTheme = .light {
         didSet {
-            navItem.leftBarButtonItem?.tintColor = theme.tintColor
+            navItem.rightBarButtonItem?.tintColor = theme.tintColor
             backgroundView?.backgroundColor = theme.color
         }
     }
@@ -103,8 +103,8 @@ public class ImageCarouselViewController:UIPageViewController, ImageViewerTransi
             target: self,
             action: #selector(dismiss(_:)))
         
-        navItem.leftBarButtonItem = closeBarButton
-        navItem.leftBarButtonItem?.tintColor = theme.tintColor
+        navItem.rightBarButtonItem = closeBarButton
+        navItem.rightBarButtonItem?.tintColor = theme.tintColor
         navBar.alpha = 0.0
         navBar.items = [navItem]
         navBar.insert(to: view)
@@ -126,7 +126,7 @@ public class ImageCarouselViewController:UIPageViewController, ImageViewerTransi
                 case .contentMode(let contentMode):
                     self.imageContentMode = contentMode
                 case .closeIcon(let icon):
-                    navItem.leftBarButtonItem?.image = icon
+                    navItem.rightBarButtonItem?.image = icon
                 case .rightNavItemTitle(let title, let onTap):
                     navItem.rightBarButtonItem = UIBarButtonItem(
                         title: title,
