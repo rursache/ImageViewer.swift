@@ -21,36 +21,12 @@ An easy to use Image Viewer that is inspired by Facebook
 
 ## Installation
 
-### CocoaPods
-
-Using [cocoapods](https://cocoapods.org)
-
-```ruby
-pod 'ImageViewer.swift', '~> 3.0'
-```
-
-If you need remote image fetching:
-
-```ruby
-pod 'ImageViewer.swift', '~> 3.0'
-pod 'ImageViewer.swift/Fetcher', '~> 3.0'
-```
-
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Alamofire into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "michaelhenry/ImageViewer.swift" ~> 3.2
-```
+Use SPM
 
 ## How to use it
 
-The simplest way to to use this is by using the [imageView.setupImageViewer()](https://github.com/michaelhenry/MHFacebookImageViewer/blob/master/Example/Demo/BasicViewController.swift#L11)
-
-
 ```swift
-imageView.setupImageViewer()
+UIImageView.setupImageViewer()
 ```
 
 Example:
@@ -64,12 +40,6 @@ imageView.image = UIImage(named: 'cat1')
 imageView.setupImageViewer()
 ```
 
-Or you might load it from a URL
-
-```swift
-imageView.setupImageViewer(url: URL(string: "https://example.com/image.jpg")!)
-```
-
 Or you might load it with an array of images `[UIImage]`
 
 ```swift
@@ -79,17 +49,6 @@ let images = [
     UIImage(named: "cat1")
 ]
 imageView.setupImageViewer(images: images)
-```
-
-Or you might load it with an array of URL `[URL]`
-
-```swift
-let urls = [
-    URL(string: "https://example.com/your-image-1.jpg")!,
-    URL(string: "https://example.com/your-image-2.jpg")!,
-    URL(string: "https://example.com/your-image-3.jpg")!
-]
-imageView.setupImageViewer(urls: urls)
 ```
 
 ### How to change the layout or options that are available
@@ -104,29 +63,6 @@ public enum ImageViewerOption {
     case rightNavItemIcon(UIImage, onTap: ((Int) -> Void)?)
 }
 ```
-
-
-You could also check the [Demo](Example) Project for more information.
-
-
-### Easy peasy :)
-
-Please let me know if you have any questions.
-
-Cheers,
-[Michael Henry Pantaleon](http://www.iamkel.net)
-
-Twitter: [@michaelhenry119](https://twitter.com/michaelhenry119)
-
-Linked in: [ken119](http://ph.linkedin.com/in/ken119)
-
-http://www.iamkel.net
-
-
-# Dependency
-
-- [SDWebImage](https://github.com/SDWebImage/SDWebImage), for downloading and caching images.
-
 
 # License
 

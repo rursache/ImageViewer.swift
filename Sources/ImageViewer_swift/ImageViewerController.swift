@@ -4,7 +4,6 @@ class ImageViewerController:UIViewController,
 UIGestureRecognizerDelegate {
     
     var imageView: UIImageView = UIImageView(frame: .zero)
-    let imageLoader: ImageLoader
     
     var backgroundView:UIView? {
         guard let _parent = parent as? ImageCarouselViewController
@@ -35,12 +34,10 @@ UIGestureRecognizerDelegate {
     
     init(
         index: Int,
-        imageItem:ImageItem,
-        imageLoader: ImageLoader) {
+        imageItem:ImageItem) {
 
         self.index = index
         self.imageItem = imageItem
-        self.imageLoader = imageLoader
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -88,12 +85,6 @@ UIGestureRecognizerDelegate {
         case .image(let img):
             imageView.image = img
             imageView.layoutIfNeeded()
-        case .url(let url, let placeholder):
-            imageLoader.loadImage(url, placeholder: placeholder, imageView: imageView) { (image) in
-                DispatchQueue.main.async {[weak self] in
-                    self?.layout()
-                }
-            }
         default:
             break
         }

@@ -6,7 +6,6 @@ extension UIImageView {
     private class TapWithDataRecognizer:UITapGestureRecognizer {
         weak var from:UIViewController?
         var imageDatasource:ImageDataSource?
-        var imageLoader:ImageLoader?
         var initialIndex:Int = 0
         var options:[ImageViewerOption] = []
     }
@@ -19,41 +18,18 @@ extension UIImageView {
     
     public func setupImageViewer(
         options:[ImageViewerOption] = [],
-        from:UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
+        from:UIViewController? = nil) {
         setup(
             datasource: SimpleImageDatasource(imageItems: [.image(image)]),
             options: options,
-            from: from,
-            imageLoader: imageLoader)
-    }
-
-    public func setupImageViewer(
-        url:URL,
-        initialIndex:Int = 0,
-        placeholder: UIImage? = nil,
-        options:[ImageViewerOption] = [],
-        from:UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
-        
-        let datasource = SimpleImageDatasource(
-            imageItems: [url].compactMap {
-                ImageItem.url($0, placeholder: placeholder)
-        })
-        setup(
-            datasource: datasource,
-            initialIndex: initialIndex,
-            options: options,
-            from: from,
-            imageLoader: imageLoader)
+            from: from)
     }
     
     public func setupImageViewer(
         images:[UIImage],
         initialIndex:Int = 0,
         options:[ImageViewerOption] = [],
-        from:UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
+        from:UIViewController? = nil) {
         
         let datasource = SimpleImageDatasource(
             imageItems: images.compactMap {
@@ -63,51 +39,27 @@ extension UIImageView {
             datasource: datasource,
             initialIndex: initialIndex,
             options: options,
-            from: from,
-            imageLoader: imageLoader)
-    }
-
-    public func setupImageViewer(
-        urls:[URL],
-        initialIndex:Int = 0,
-        options:[ImageViewerOption] = [],
-        placeholder: UIImage? = nil,
-        from:UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
-        
-        let datasource = SimpleImageDatasource(
-            imageItems: urls.compactMap {
-                ImageItem.url($0, placeholder: placeholder)
-        })
-        setup(
-            datasource: datasource,
-            initialIndex: initialIndex,
-            options: options,
-            from: from,
-            imageLoader: imageLoader)
+            from: from)
     }
     
     public func setupImageViewer(
         datasource:ImageDataSource,
         initialIndex:Int = 0,
         options:[ImageViewerOption] = [],
-        from:UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
+        from:UIViewController? = nil) {
         
         setup(
             datasource: datasource,
             initialIndex: initialIndex,
             options: options,
-            from: from,
-            imageLoader: imageLoader)
+            from: from)
     }
     
     private func setup(
         datasource:ImageDataSource?,
         initialIndex:Int = 0,
         options:[ImageViewerOption] = [],
-        from: UIViewController? = nil,
-        imageLoader:ImageLoader? = nil) {
+        from: UIViewController? = nil) {
         
         var _tapRecognizer:TapWithDataRecognizer?
         gestureRecognizers?.forEach {
@@ -140,7 +92,6 @@ extension UIImageView {
         }
         // Pass the Data
         _tapRecognizer!.imageDatasource = datasource
-        _tapRecognizer!.imageLoader = imageLoader
         _tapRecognizer!.initialIndex = initialIndex
         _tapRecognizer!.options = options
         _tapRecognizer!.from = from
@@ -153,7 +104,6 @@ extension UIImageView {
         let imageCarousel = ImageCarouselViewController.init(
             sourceView: sourceView,
             imageDataSource: sender.imageDatasource,
-            imageLoader: sender.imageLoader ?? URLSessionImageLoader(),
             options: sender.options,
             initialIndex: sender.initialIndex)
         let presentFromVC = sender.from ?? vc
